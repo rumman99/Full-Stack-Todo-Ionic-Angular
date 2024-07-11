@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>TODO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="flex justify-end">
+    <ion-button class="mb-4" [routerLink]="['/create-todo']"
+      >Add Task</ion-button
+    >
+  </div>
+
+  <ion-grid class="divide-y divide-gray-200">
+    <!-- Table Header -->
+    <ion-row class="ion-align-items-center ion-text-center bg-gray-100">
+      <ion-col size="3">
+        <ion-label class="font-bold">Task</ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <ion-label class="font-bold">Status</ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <ion-label class="font-bold">Assigned To</ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <ion-label class="font-bold">Action</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <!-- Table Rows -->
+    <ng-container *ngFor="let todo of todos; index as i">
+      <ion-row class="ion-align-items-center ion-text-center hover:bg-gray-50">
+        <ion-col size="3">
+          <ion-label>{{ todo.task }}</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>{{ todo.status }}</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>{{ todo.assignTo }}</ion-label>
+        </ion-col>
+        <ion-col class="flex justify-center">
+          <ion-icon
+            class="text-2xl mt-2 text-red-600 hover:text-green-600"
+            name="remove-circle"
+            (click)="deleteTask(todo._id)"
+          ></ion-icon>
+          <ion-icon
+            class="text-2xl mt-2 ml-2 text-green-600 hover:text-red-600"
+            name="pencil-outline"
+            (click)="onEdit(todo._id)"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+
+  @if(isLoading) {
+  <div class="flex justify-center items-center">
+    <ion-spinner name="bubbles"> </ion-spinner>
+  </div>
+
+  }
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>createTodo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="todoForm" (submit)="todoSubmit()">
+    <div>
+      <ion-card class="wrapper">
+        <ion-card-content>
+          <ion-item>
+            <ion-icon name="clipboard-outline"></ion-icon>
+            <ion-input
+              type="text"
+              placeholder="Enter Task"
+              formControlName="task"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+            <ion-input
+              type="text"
+              placeholder="Assign To"
+              formControlName="assignTo"
+            ></ion-input>
+          </ion-item>
+          <div class="ml-5 text-md">
+            <ion-label>Status</ion-label>
+            <ion-select formControlName="status">
+              <ion-select-option value="Pending">Pending</ion-select-option>
+              <ion-select-option value="InProgress">InProgress</ion-select-option>
+              <ion-select-option value="Completed">Completed</ion-select-option>
+            </ion-select>
+          </div>
+          <ion-button type="submit" expand="block" shape="round"> Create </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </form>
+
+  @if(isLoading) {
+    <div class="flex justify-center items-center">
+      <ion-spinner name="bubbles"> </ion-spinner>
+    </div>
+  }
+</ion-content>
